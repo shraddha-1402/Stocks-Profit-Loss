@@ -13,10 +13,12 @@ function checkProfitLoss(event) {
   let noOfStocks = parseInt(noOfStocksElement.value);
   let change = Math.abs(purPrice - currPrice);
   let changePercentage = (change * 100) / purPrice;
-  if (purPrice <= currPrice) {
+  if (purPrice < currPrice) {
     imgElement.setAttribute("src", "./image/profit.jpg");
     output.innerText = `You gained ${changePercentage.toFixed(2)} %. Your total profit is ${change * noOfStocks} Rs`;
   }
+  else if (purPrice === currPrice)
+    output.innerText = `You gained ${changePercentage.toFixed(2)} %. Your total profit is ${change * noOfStocks} Rs`;
   else {
     imgElement.setAttribute("src", "./image/loss.png");
     output.innerText = `You lost ${changePercentage.toFixed(2)}%. Your total loss is ${change * noOfStocks} Rs`;
