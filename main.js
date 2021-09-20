@@ -11,17 +11,26 @@ function checkProfitLoss(event) {
   let purPrice = parseInt(purPriceElement.value);
   let currPrice = parseInt(currPriceElement.value);
   let noOfStocks = parseInt(noOfStocksElement.value);
-  let change = Math.abs(purPrice - currPrice);
-  let changePercentage = (change * 100) / purPrice;
-  if (purPrice < currPrice) {
-    imgElement.setAttribute("src", "./image/profit.jpg");
-    output.innerText = `You gained ${changePercentage.toFixed(2)} %. Your total profit is ${change * noOfStocks} Rs`;
-  }
-  else if (purPrice === currPrice)
-    output.innerText = `You gained ${changePercentage.toFixed(2)} %. Your total profit is ${change * noOfStocks} Rs`;
+
+  if (purPrice <= 0)
+    output.innerText = "Purchase Price Should Be Greater than Zero!"
+  else if (noOfStocks <= 0)
+    output.innerText = "Stocks Quantity Should Be Greater than Zero!"
+  else if (currPrice <= 0)
+    output.innerText = "Current Price Should Be Greater than Zero!"
   else {
-    imgElement.setAttribute("src", "./image/loss.png");
-    output.innerText = `You lost ${changePercentage.toFixed(2)}%. Your total loss is ${change * noOfStocks} Rs`;
+    let change = Math.abs(purPrice - currPrice);
+    let changePercentage = (change * 100) / purPrice;
+    if (purPrice < currPrice) {
+      imgElement.setAttribute("src", "./image/profit.jpg");
+      output.innerText = `You gained ${changePercentage.toFixed(2)} %. Your total profit is ${change * noOfStocks} Rs`;
+    }
+    else if (purPrice === currPrice)
+      output.innerText = `No Profit, No Loss!`;
+    else {
+      imgElement.setAttribute("src", "./image/loss.png");
+      output.innerText = `You lost ${changePercentage.toFixed(2)}%. Your total loss is ${change * noOfStocks} Rs`;
+    }
   }
   output.scrollIntoView(true);
 }
